@@ -71,6 +71,7 @@ if($('#ride-list').length){
 
     // the remote server where all the remote database stuff happens
     var remoteServer = 'http://192.168.254.170/braican/ridetracker/website/app/';
+    //var remoteServer = 'http://ridetracker.braican.com/app/';
 
 
 
