@@ -346,12 +346,15 @@ legend{
 	-moz-transition: all .2s linear;
 	transition: all .2s linear;
 }
-.rides-headers.out{
+.rides-headers.rt-out{
 	margin-top: 0;
 	-webkit-transition: all .2s linear;
 	-o-transition: all .2s linear;
 	-moz-transition: all .2s linear;
 	transition: all .2s linear;
+}
+.rides-headers .ride > div{
+	font-size: 12px;
 }
 .ride{
 	padding: 10px;
@@ -366,7 +369,7 @@ legend{
 
 .ride > div{
 	display: inline-block;
-	width: 40%;
+	width: 38%;
 	font-size: 16px;
 	vertical-align: middle;
 }

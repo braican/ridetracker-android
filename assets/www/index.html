@@ -11,6 +11,17 @@
 </head>
 <body>
 
+    <div class="rides-headers">
+        <div class="container">
+            <div class="ride">
+                <div class="date">Date</div>
+                <div class="time">Time</div>
+                <div class="to-from">To/From</div>
+            </div>
+        </div>
+    </div>
+
+
     <div id="jqt">
         
         <!-- HOME -->
@@ -45,24 +56,14 @@
                     <h1></h1>
                 </div>
             </header>
-            <div class="rides-headers">
-                <div class="container">
-                    <div class="ride">
-                        <div class="date">Date</div>
-                        <div class="time">Time</div>
-                        <div class="to-from">To/From</div>
-                    </div>
-                </div>
-            </div>
 
-            
             <div class="main-content">
             
                 <h2><div class="container">Add new ride</div></h2>
                 <section class="container">
                     
                     <form action="#" method="post" id="addride" data-submit="addride">
-                        <input type="date" name="ride_date" value="">
+                        <input type="text" name="ride_date" class="nativedatepicker">
                         
                         <span>
                             <input type="radio" value="0" id="ride_to" name="ride_to_from"><label for="ride_to">To</label>
@@ -135,7 +136,8 @@
 
     </div>
     
-    <!--<script type="text/javascript" src="cordova.js"></script> -->
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="datePickerPlugin.js"></script>
     <script type="text/javascript" src="js/zepto.min.js"></script>
     <script type="text/javascript" src="js/jqtouch.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>

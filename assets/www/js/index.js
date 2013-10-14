@@ -58,11 +58,21 @@ var jqt = new $.jQTouch({
     preloadImages:  []
 });
 
+var listTop = 0,
+    listBottom = 0;
+
+if($('#ride-list').length){
+    listTop = $('#ride-list').offset().top - 100;
+    listBottom = $('#ride-list').offset().top + $('.ride-row-container').height() - 80;
+}
+
 
 (function(RT, $, undefined){
 
     // the remote server where all the remote database stuff happens
     var remoteServer = 'http://192.168.254.170/braican/ridetracker/website/app/';
+
+
 
     // get all of the rides
     function getTheRides(id){
@@ -173,6 +183,7 @@ var jqt = new $.jQTouch({
                 console.log(data);
                 $this.find('input[type=number]').val('');
                 $this.find('input[type=radio]').removeAttr('checked');
+                $this.find('input[type=text]').removeAttr('checked');
                 if($this.attr('id') == 'addroute'){
                     $('#home .ajax-message').text(data);    
                     getTheRoutes();
@@ -181,6 +192,42 @@ var jqt = new $.jQTouch({
                 }
             });
         });
+
+        $('.nativedatepicker').focus(function(event) {
+            var currentField = $(this);
+            var myNewDate = Date.parse(currentField.val()) || new Date();
+            if(typeof myNewDate === "number"){ myNewDate = new Date (myNewDate); }
+
+            // Same handling for iPhone and Android
+            window.plugins.datePicker.show({
+                date : myNewDate,
+                mode : 'date',
+                allowOldDates : true
+            }, function(returnDate) {
+                var newDate = new Date(returnDate);
+                var day = newDate.getDate();
+                var month = newDate.getMonth() + 1; //Months are zero based
+                var year = newDate.getFullYear();
+
+                currentField.val(year + "-" + month + "-" + day);
+
+                // This fixes the problem you mention at the bottom of this script with it not working a second/third time around, because it is in focus.
+                currentField.blur();
+            });
+        });
+    };
+
+
+    window.onscroll = function(){
+        var sTop = window.scrollY;
+        var listTop = $('#ride-list').offset().top - 100;
+        var listBottom = $('#ride-list').offset().top + $('.ride-row-container').height() - 80;
+        if(sTop > listTop) {
+            $('.rides-headers').addClass('rt-out');
+        }
+        if(sTop > listBottom || sTop < listTop){
+            $('.rides-headers').removeClass('rt-out');
+        }
     };
 
 })(window.RT = window.RT || {}, Zepto);
