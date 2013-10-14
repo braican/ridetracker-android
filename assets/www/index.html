@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/jqtouch.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <title>Ridetracker</title>
@@ -12,24 +13,129 @@
 
     <div id="jqt">
         
+        <!-- HOME -->
         <div id="home" class="current">
-            <div class="app">
-                <h1>Apache Cordova</h1>
-                <div id="deviceready" class="blink">
-                    <p class="event listening">Connecting to Device</p>
-                    <p class="event received">Device is Ready</p>
+            
+            <header class="page-header">
+                <div class="container clearfix">
+                    <h1>Ridetracker</h1>
                 </div>
+            </header>
 
-                <a href="#spec">SPEC</a>
+            <div class="main-content">
+                <section class="refresh-this container" id="route-list"></section><!-- .route-list -->
+                
+                <section class="container">
+                    <form action="#" method="post" id="addroute" data-submit="addroute">
+                        <input type="text" name="new_route" maxlength="70" placeholder="add route"></input>
+                        <input type="number" step="any" name="length" placeholder="length (miles)"></input>
+                        <input type="submit" value="Submit"></input>
+                    </form>
+                </section>
+
+                <div class="ajax-message"></div>
             </div>
-        </div>
+        </div><!-- end HOME -->
 
-        <div id="spec">
-            <h1>SPEC</h1>
-        </div>
+        <!-- RIDE -->
+        <div id="ride">
+            <header class="page-header">
+                <div class="container clearfix title-bar">
+                    <!-- <a href="#home" class="slideright">&#10094;&#10094; Routes</a>  -->
+                    <h1></h1>
+                </div>
+            </header>
+            <div class="rides-headers">
+                <div class="container">
+                    <div class="ride">
+                        <div class="date">Date</div>
+                        <div class="time">Time</div>
+                        <div class="to-from">To/From</div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="main-content">
+            
+                <h2><div class="container">Add new ride</div></h2>
+                <section class="container">
+                    
+                    <form action="#" method="post" id="addride" data-submit="addride">
+                        <input type="date" name="ride_date" value="">
+                        
+                        <span>
+                            <input type="radio" value="0" id="ride_to" name="ride_to_from"><label for="ride_to">To</label>
+                            <input type="radio" value="1" id="ride_from" name="ride_to_from"><label for="ride_from">From</label>
+                        </span>
+                        
+                        <fieldset class="the-time-fields clearfix">
+                            <legend>time</legend>
+                            <input type="number" name="ride_hrs" placeholder="hrs">
+                            <input type="number" name="ride_mins" max="59" placeholder="min">
+                            <input type="number" name="ride_secs" max="59" placeholder="sec">
+                        </fieldset>
+                        
+                        <input type="hidden" name="route_id" value="">
+                        <input type="submit" value="Submit">
+                    </form>
+                </section>
+                
+                
+                <h2><div class="container">Ride list</div></h2>
+                <section class="refresh-this clearfix container" id="ride-list">
+                    <div class="ride-row-container"></div>
+                    
+                    <!-- overall stats -->
+                    <div class="stats clearfix overall">
+                        <h3>Overall (<span class="count">0</span> rides)</h3>
+                        <div class="the-stats">
+                            <div><div>best time</div> <div class="best-time"></div></div>
+                            <div><div>worst time</div> <div class="worst-time"></div></div>
+                            <div><div>average time</div> <div class="avg-time"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- to stats -->
+                    <div class="stats clearfix to">
+                        <h3>To (<span class="count">0</span> rides)</h3>
+                        <div class="the-stats">
+                            <div><div>best time</div> <div class="best-time"></div></div>
+                            <div><div>worst time</div> <div class="worst-time"></div></div>
+                            <div><div>average time</div> <div class="avg-time"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- from stats -->
+                    <div class="stats clearfix from">
+                        <h3>From (<span class="count">0</span> rides)</h3>
+                        <div class="the-stats">
+                            <div><div>best time</div> <div class="best-time"></div></div>
+                            <div><div>worst time</div> <div class="worst-time"></div></div>
+                            <div><div>average time</div> <div class="avg-time"></div></div>
+                        </div>
+                    </div>
+                </section><!-- .ride-list -->
+
+                <h2><div class="container">Graphics</div></h2>
+                <section class="the-charts container">
+                    
+                    <div id="to-canvas-container">
+                        <h3>To</h3>
+                        <canvas id="to-canvas" height="450" width="527"></canvas>
+                    </div>
+
+                    <div id="from-canvas-container">
+                        <h3>From</h3>
+                        <canvas id="from-canvas" height="450" width="527"></canvas>
+                    </div>
+                </section>
+            </div><!-- .main-content -->
+        </div><!-- end RIDE -->
+
     </div>
     
-    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="cordova.js"></script> -->
     <script type="text/javascript" src="js/zepto.min.js"></script>
     <script type="text/javascript" src="js/jqtouch.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>

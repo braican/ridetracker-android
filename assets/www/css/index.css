@@ -3,30 +3,64 @@
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
 body {
     -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
     -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    background-color:#E4E4E4;
-    background-image:linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
-    background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
-    );
-    background-attachment:fixed;
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:12px;
+    font-size:100%;
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
     width:100%;
+    line-height: 1;
+    font-family: 'Lato', sans-serif;
+    background: #ededed;
 }
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
 
 /* Portrait layout (default) */
 .app {
@@ -95,4 +129,315 @@ h1 {
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
+}
+
+
+/* ================================================
+   --start ridetracker
+   ================================================ */
+
+/* -----------------------------------
+ * --global
+ * ----------------------------------- */
+
+/* typography */
+h1{
+	font-size: 2em;
+	font-weight: bold;
+}
+h2{
+	font-size: 2em;
+	/*background: #12165a;*/
+	background: rgba(18, 22, 90, .2);
+	color: #000;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 20px 0;
+}
+h3{
+	font-size: 1em;
+	background: #45498D;
+	color: #fff;
+	padding: 10px;
+}
+
+a{
+	text-decoration: none;
+	color: #0053b7;
+}
+a:hover{
+	color: #1A6DD1;
+}
+
+/* forms */
+form{
+	margin: 20px 0;
+}
+input{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+input[type=text],
+input[type=number],
+input[type=date]{
+	padding: 8px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	background-color: #f2f2f2;
+	font-size: 14px;
+	margin: 0;
+	height: 36px;
+	font-family: 'Lato', sans-serif;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+input[type=submit]{
+	background-color: #0053b7;
+	border: 0;
+	height: 36px;
+	margin: 10px 0;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 16px;
+	color:#fff;
+	cursor: pointer;
+	padding: 8px;
+
+	-webkit-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+input[type=submit]:hover{
+	background-color: #1A6DD1;
+
+	-webkit-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+    padding: 8px 12px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    width: 40px;
+    text-align: center;
+}
+input[type=radio] {  
+    display: none;  
+}
+
+input[type=radio]:nth-of-type(1):checked + label {
+    background: #900;
+    color: #fff;
+}
+input[type=radio]:nth-of-type(2):checked + label {
+    background: #090;
+    color: #fff;
+}
+
+legend{
+	padding: 10px;
+	background: #12165a;
+	color: #fff;
+	display: none;
+}
+
+/* -----------------------------------
+ * --layout
+ * ----------------------------------- */
+.container{
+	width: 96%;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+/* header */
+.page-header{
+	background: #c94500;
+	position: relative;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+	-webkit-box-shadow: 0 4px 6px rgba(0,0,0,.6);
+	-moz-box-shadow: 0 4px 6px rgba(0,0,0,.6);
+	box-shadow: 0 4px 6px rgba(0,0,0,.6);
+}
+
+.page-header h1{
+	line-height: 60px;
+	color: #fff;
+}
+.page-header a{
+	line-height: 60px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #7FD2FF;
+}
+.page-header a:hover{
+	color: #66B9FF;
+}
+
+/* main-content */
+#home .main-content{
+	margin-top: 20px;
+}
+
+/* -----------------------------------
+ * --list of routes
+ * ----------------------------------- */
+
+#route-list .route a{
+	display: block;
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+#route-list .route a.active{
+	background: #ccc;
+}
+#route-list .route a span{
+	color: #999;
+	float: right;
+	font-size: .8em;
+}
+
+/* -----------------------------------
+ * --list of rides
+ * ----------------------------------- */
+.the-time-fields{
+	margin-top: 10px;
+
+}
+.the-time-fields input{
+	width: 33.33333%;
+	float: left;
+}
+
+.title-bar{
+	position: relative;
+	z-index: 11;
+}
+.rides-headers{
+	background: #ddd;
+	font-weight: bold;
+	text-transform: uppercase;
+	height: 36px;
+	-webkit-box-shadow: 0 2px 5px rgba(0,0,0,.4);
+	-moz-box-shadow: 0 2px 5px rgba(0,0,0,.4);
+	box-shadow: 0 2px 5px rgba(0,0,0,.4);
+	position: fixed;
+	z-index: 9;
+	top: 0;
+	width: 100%;
+	margin-top: -36px;
+	-webkit-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+.rides-headers.out{
+	margin-top: 0;
+	-webkit-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	transition: all .2s linear;
+}
+.ride{
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: 0;
+}
+.ride:nth-child(even){
+	background: #ddd;
+}
+
+.ride > div{
+	display: inline-block;
+	width: 40%;
+	font-size: 16px;
+	vertical-align: middle;
+}
+
+.ride .to-from{	
+	width: 20%;
+}
+
+#ride-list{
+	margin-bottom: 40px;
+}
+#ride-list .ride .to-from{
+	font-size: 26px;
+}
+
+.ride .to{
+	color: #900;
+}
+.ride .from{
+	color: #090;
+}
+
+.the-time{
+	font-weight: 700;
+}
+
+/* stats */
+.stats{
+	margin: 20px 0;
+}
+.the-stats > div{
+	float: left;
+	width: 33.3333%;
+	margin: 0;
+	line-height: 1.5em;
+	background: #fff;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 5px;
+	text-align: center;
+}
+.the-stats > div:first-child{
+	border-left: 1px solid #ccc;
+}
+.stats .the-time{
+	font-size: 1.2em;
+}
+
+/* the charts */
+.the-charts{
+	padding: 40px 0;
+}
+.the-charts canvas{
+	margin-top: 20px;
+}
+.the-charts > div h2{
+	margin-bottom: 20px;
+}
+
+/* -----------------------------------
+ * --util
+ * ----------------------------------- */
+.clearfix:before, .clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+
+
+/* -----------------------------------
+ * --media queries
+ * ----------------------------------- */
+@media only screen and (max-width: 560px){
 }
