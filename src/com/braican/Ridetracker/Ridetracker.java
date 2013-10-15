@@ -27,9 +27,10 @@ public class Ridetracker extends DroidGap
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+    	super.setIntegerProperty("splashscreen", R.drawable.screen);
         super.onCreate(savedInstanceState);
         // Set by <content src="index.html" /> in config.xml
-        super.loadUrl(Config.getStartUrl());
+        super.loadUrl(Config.getStartUrl(), 4000);
         //super.loadUrl("file:///android_asset/www/index.html")
     }
 }

@@ -66,12 +66,26 @@ if($('#ride-list').length){
     listBottom = $('#ride-list').offset().top + $('.ride-row-container').height() - 80;
 }
 
-
 (function(RT, $, undefined){
 
+    $.extend($.fn, {
+      fadeIn: function(ms){
+        if(typeof(ms) === 'undefined'){
+          ms = 250;
+        }
+        $(this).css({
+          display: 'block',
+          opacity:0
+        }).animate({
+          opacity: 1
+        }, ms);
+        return this;
+      }
+    });
+
     // the remote server where all the remote database stuff happens
-    var remoteServer = 'http://192.168.254.170/braican/ridetracker/website/app/';
-    //var remoteServer = 'http://ridetracker.braican.com/app/';
+    //var remoteServer = 'http://192.168.254.170/braican/ridetracker/website/app/';
+    var remoteServer = 'http://ridetracker.braican.com/app/';
 
 
 
@@ -115,6 +129,11 @@ if($('#ride-list').length){
                     $('#ride-list .from .best-time').html(outputTime(json.from_min));
                     $('#ride-list .from .worst-time').html(outputTime(json.from_max));
                     $('#ride-list .from .avg-time').html(outputTime(json.from_avg));
+
+                    setTimeout(function(){
+                        $('#ride .main-content').fadeIn();
+                    }, 300);
+
 
                 }
             }
@@ -171,6 +190,7 @@ if($('#ride-list').length){
         $(document).on('click', '#route-list a', function(event){
             event.preventDefault();
             var id = this.getAttribute('data-id');
+            $('#ride .main-content').hide();
             getTheRides(id);
             $('input[name="route_id"]').val(id);
         });
